@@ -8,6 +8,33 @@
   align-items: flex-end;
 }
 
+.fighter-preview___right img{
+  transform: scaleX(-1);
+}
+
 .fighter-preview___left {
   align-items: flex-start;
+}
+
+.fighter-preview___img{
+  height: 300px;
+}
+
+.fighter-info__box{
+  width: 150px;
+  background: #ffdfa7;
+  border: 5px solid #ca9650;
+}
+
+.fighter-info{
+  display: flex;
+  justify-content: space-between;
+  color: red;
+}
+
+.dashed{
+  flex: 1;
+  margin: 0 5px;
+  margin-bottom: 4px;
+  border-bottom: 1px dashed red;
 }

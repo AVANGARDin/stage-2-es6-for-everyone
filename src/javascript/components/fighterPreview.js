@@ -8,6 +8,39 @@ export function createFighterPreview(fighter, position) {
   });
 
   // todo: show fighter info (image, name, health, etc.)
+  
+  if(fighter) {
+    const fighterInfoBox = createElement({
+      tagName: 'div',
+      className: `fighter-info__box`,
+    });
+
+    fighterInfoBox.innerHTML = `
+    <div class='fighter-info'>
+      <div>Name</div>
+      <div class='dashed'></div>
+      <div>${fighter.name}</div>
+    </div>
+    <div class='fighter-info'>
+      <div>Health</div>
+      <div class='dashed'></div>
+      <div>${fighter.health}</div>
+    </div>
+    <div class='fighter-info'>
+      <div>Attack</div>
+      <div class='dashed'></div>
+      <div>${fighter.attack}</div>
+    </div>
+    <div class='fighter-info'>
+      <div>Defense</div>
+      <div class='dashed'></div>
+      <div>${fighter.defense}</div>
+    </div>
+    `
+
+    fighterElement.appendChild(createFighterImage(fighter));
+    fighterElement.appendChild(fighterInfoBox)
+  }
 
   return fighterElement;
 }
