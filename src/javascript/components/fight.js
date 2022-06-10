@@ -65,6 +65,38 @@ export async function fight(firstFighter, secondFighter) {
       if(event.code === controls.PlayerTwoBlock){
         secondPlayer.isDefense = true;
       }
+      //Combo Hit Block
+      if(controls.PlayerOneCriticalHitCombination.includes(event.code) && firstPlayer.isCombo === false){
+        firstPlayerCombo.add(event.code)
+        if(firstPlayerCombo.size === 3){
+          firstPlayer.isCombo = true;
+          setTimeout(()=> firstPlayer.isCombo = false, 10000);
+          secondPlayer.healthBar -= firstPlayer.attack * 2;
+          if(secondPlayer.healthBar<= 0) {
+            resolve(firstFighter)
+            healthBarSecondPlayer.style.width = 0;
+            document.removeEventListener('keydown', keyDownHendler)
+            document.removeEventListener('keyup', keyUpHendler)
+          }
+        healthBarSecondPlayer.style.width = `${secondPlayer.healthBar}%`
+        }
+      }
+
+      if(controls.PlayerTwoCriticalHitCombination.includes(event.code) && secondPlayer.isCombo === false){
+        secondPlayerCombo.add(event.code)
+        if(secondPlayerCombo.size === 3){
+          secondPlayer.isCombo = true;
+          setTimeout(()=> secondPlayer.isCombo = false, 10000);
+          firstPlayer.healthBar -= secondPlayer.attack * 2;
+          if(firstPlayer.healthBar<= 0) {
+            resolve(secondFighter)
+            healthBarFirstPlayer.style.width = 0;
+            document.removeEventListener('keydown', keyDownHendler)
+            document.removeEventListener('keyup', keyUpHendler)
+          }
+        healthBarFirstPlayer.style.width = `${firstPlayer.healthBar}%`
+        }
+      }
     }
   
     function keyUpHendler(event){
@@ -83,6 +115,14 @@ export async function fight(firstFighter, secondFighter) {
 
       if(event.code === controls.PlayerTwoBlock){
         secondPlayer.isDefense = false;
+      }
+      //Combo Hit Block
+      if(controls.PlayerOneCriticalHitCombination.includes(event.code)){
+        firstPlayerCombo.clear();
+      }
+
+      if(controls.PlayerTwoCriticalHitCombination.includes(event.code)){
+        secondPlayerCombo.clear();
       }
     }
 
