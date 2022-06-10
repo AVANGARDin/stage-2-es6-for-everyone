@@ -118,11 +118,11 @@ export async function fight(firstFighter, secondFighter) {
       }
       //Combo Hit Block
       if(controls.PlayerOneCriticalHitCombination.includes(event.code)){
-        firstPlayerCombo.clear();
+        firstPlayerCombo.delete(event.code);
       }
 
       if(controls.PlayerTwoCriticalHitCombination.includes(event.code)){
-        secondPlayerCombo.clear();
+        secondPlayerCombo.delete(event.code);
       }
     }
 
