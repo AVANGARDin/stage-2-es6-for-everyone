@@ -17,6 +17,10 @@
   background-color: white;
 }
 
+.modal-root img {
+  height: 430px;
+}
+
 .modal-header {
   display: flex;
   align-items: center;
