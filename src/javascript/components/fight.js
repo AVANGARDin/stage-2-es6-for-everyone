@@ -8,6 +8,8 @@ export async function fight(firstFighter, secondFighter) {
 
 export function getDamage(attacker, defender) {
   // return damage
+  const damage = getHitPower(attacker) - getBlockPower(defender);
+  return damage > 0 ? damage : 0;
 }
 
 export function getHitPower(fighter) {
