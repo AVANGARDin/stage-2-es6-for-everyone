@@ -24,8 +24,54 @@ export async function fight(firstFighter, secondFighter) {
     const firstPlayerCombo = new Set();
     const secondPlayerCombo = new Set();
 
-    
+    function keyDownHendler(event){
+      //Attack block
+      if(event.code === controls.PlayerOneAttack && 
+        firstPlayer.cancelAutoRepeat === false && 
+        firstPlayer.isDefense === false &&
+        secondPlayer.isDefense === false){
 
+        firstPlayer.cancelAutoRepeat = true;
+        secondPlayer.healthBar -= Math.trunc(getDamage(firstPlayer,secondPlayer)/secondPlayer.health * 100)
+          if(secondPlayer.healthBar<= 0) {
+            resolve(firstFighter)
+            healthBarSecondPlayer.style.width = 0;
+            document.removeEventListener('keydown', keyDownHendler)
+            document.removeEventListener('keyup', keyUpHendler)
+          }
+        healthBarSecondPlayer.style.width = `${secondPlayer.healthBar}%`
+      }
+
+      if(event.code === controls.PlayerTwoAttack && 
+        secondPlayer.cancelAutoRepeat === false && 
+        secondPlayer.isDefense === false &&
+        firstPlayer.isDefense === false){
+
+        secondPlayer.cancelAutoRepeat = true;
+        firstPlayer.healthBar -= Math.trunc(getDamage(secondPlayer,firstPlayer)/firstPlayer.health * 100)
+          if(firstPlayer.healthBar<= 0) {
+            resolve(secondFighter)
+            healthBarFirstPlayer.style.width = 0;
+            document.removeEventListener('keydown', keyDownHendler)
+            document.removeEventListener('keyup', keyUpHendler)
+          }
+          healthBarFirstPlayer.style.width = `${firstPlayer.healthBar}%`
+      }
+    }
+  
+    function keyUpHendler(event){
+      //Attack block
+      if(event.code === controls.PlayerOneAttack){
+        firstPlayer.cancelAutoRepeat = false;
+      }
+
+      if(event.code === controls.PlayerTwoAttack){
+        secondPlayer.cancelAutoRepeat = false;
+      }
+    }
+
+    document.addEventListener('keydown',keyDownHendler);
+    document.addEventListener('keyup',keyUpHendler);
   });
 }
 
