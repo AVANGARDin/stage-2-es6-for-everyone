@@ -57,6 +57,14 @@ export async function fight(firstFighter, secondFighter) {
           }
           healthBarFirstPlayer.style.width = `${firstPlayer.healthBar}%`
       }
+      //Defense block
+      if(event.code === controls.PlayerOneBlock){
+        firstPlayer.isDefense = true;
+      }
+
+      if(event.code === controls.PlayerTwoBlock){
+        secondPlayer.isDefense = true;
+      }
     }
   
     function keyUpHendler(event){
@@ -67,6 +75,14 @@ export async function fight(firstFighter, secondFighter) {
 
       if(event.code === controls.PlayerTwoAttack){
         secondPlayer.cancelAutoRepeat = false;
+      }
+      //Defense block
+      if(event.code === controls.PlayerOneBlock){
+        firstPlayer.isDefense = false;
+      }
+
+      if(event.code === controls.PlayerTwoBlock){
+        secondPlayer.isDefense = false;
       }
     }
 
